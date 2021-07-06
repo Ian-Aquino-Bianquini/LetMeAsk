@@ -1,3 +1,7 @@
+:root {
+  --gray: #29292e;
+}
+
 #page-room {
   header {
     padding: 24px;
@@ -36,7 +40,7 @@ main {
     h1 {
       font-family: "Poppins", sans-serif;
       font-size: 24px;
-      color: #29292e;
+      color: #fefefe;
     }
 
     span {
@@ -56,7 +60,8 @@ main {
       border: 0;
       padding: 16px;
       border-radius: 8px;
-      background: #fefefe;
+      background: #333333;
+      color: #f8f8f8;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
       resize: vertical;
       min-height: 130px;
@@ -79,7 +84,7 @@ main {
 
         span {
           margin-left: 0px;
-          color: #29292e;
+          color: #f8f8f8;
           font-weight: 500;
           font-size: 14px;
         }
@@ -102,7 +107,31 @@ main {
       }
     }
   }
-  .question-list {
-    margin-top: 32px;
+}
+.empty-content {
+  margin-top: 5rem;
+  img {
+    display: flex;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.question-list {
+  margin-top: 32px;
+}
+
+.checked {
+  circle {
+    stroke: #835afd;
+    fill: #835afd;
+  }
+  path {
+    stroke: #f8f8f8;
+  }
+  path:empty {
+    fill: #835afd;
+    // stroke: #835afd;
   }
 }

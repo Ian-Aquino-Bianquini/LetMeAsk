@@ -1,5 +1,5 @@
 .question {
-  background: #fefefe;
+  background: #333333;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
@@ -7,53 +7,71 @@
   & + & {
     margin-top: 8px;
   }
-}
 
-p {
-  color: #292929;
-}
+  &.highlighted {
+    background: #262a2f;
+    border: 1px solid #835afd;
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 24px;
-  .user-info {
-    display: flex;
-    align-items: center;
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-    }
-
-    span {
-      margin-left: 0px;
-      color: #737380;
-      font-size: 14px;
+    footer .user-info {
+      color: #f8f8f8, 180%;
     }
   }
-  button {
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    transition: filter 0.2;
+  &.answered {
+    background: #474747;
+  }
 
-    &.like-button {
+  p {
+    color: #f8f8f8;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    .user-info {
       display: flex;
-      align-items: flex-end;
-      color: #737380;
-      gap: 8px;
-
-      &.liked {
-        color: #835afd;
-
-        svg path {
-          stroke: #835afd;
-        }
+      align-items: center;
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
       }
-      &:hover {
-        filter: brightness(0.8);
+
+      span {
+        margin-left: 0px;
+        color: #cbcbdd;
+        font-size: 14px;
+      }
+    }
+
+    > div {
+      display: flex;
+      gap: 16px;
+    }
+
+    button {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      transition: filter 0.2;
+
+      &.like-button {
+        display: flex;
+        align-items: flex-end;
+        color: #d1d1d1;
+        gap: 8px;
+
+        &.liked {
+          color: #b095ff;
+
+          svg path {
+            stroke: #b095ff;
+          }
+        }
+        &:hover {
+          filter: brightness(0.8);
+        }
       }
     }
   }
