@@ -1,13 +1,14 @@
 import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { database } from "../services/firebase";
 import { Question } from "../components/Question";
 import { useRoom } from "../hooks/useRoom";
 import emptyIMG from "../assets/images/EmptyState.svg";
+import { getAuthorRoom } from "../hooks/useAuthor";
 
 import "../styles/room.scss";
 
@@ -20,7 +21,17 @@ export function Room() {
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState("");
   const roomId = params.id;
+  const history = useHistory();
   const { questions, title } = useRoom(roomId);
+  const authorId = getAuthorRoom(roomId);
+
+  function verifyADM() {
+    if (authorId === user?.id && authorId !== (null || undefined)) {
+      history.push(`/admin/rooms/${roomId}/`);
+    }
+  }
+
+  verifyADM();
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();

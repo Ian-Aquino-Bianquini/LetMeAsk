@@ -1,7 +1,4 @@
 import logoImg from "../assets/images/logo.svg";
-// import checkImg from "../assets/images/check.svg";
-// import answerImg from "../assets/images/answer.svg";
-// import cx from "classnames";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import "../styles/room.scss";
@@ -14,17 +11,31 @@ import { database } from "../services/firebase";
 import emptyIMG from "../assets/images/EmptyState.svg";
 import { useState } from "react";
 
+import { getAuthorRoom } from "../hooks/useAuthor";
+import { useAuth } from "../hooks/useAuth";
+
 type RoomParams = {
   id: string;
 };
 
 export function AdminRoom() {
   const history = useHistory();
+  const { user } = useAuth();
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const { questions, title } = useRoom(roomId);
   const [isAnsweredQuest, setIsAnsweredQuest] = useState(false);
   const [isHighlightedQuest, setIsHighlightedQuest] = useState(false);
+
+  const authorId = getAuthorRoom(roomId);
+
+  function verifyADM() {
+    if (authorId !== user?.id && authorId !== (null || undefined)) {
+      history.push(`/rooms/${roomId}/`);
+    }
+  }
+
+  verifyADM();
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}/`).update({
@@ -33,6 +44,11 @@ export function AdminRoom() {
 
     history.push("/");
   }
+
+  // async function handleAtualizateStates() {
+  //   // await database.ref(`rooms/${roomId}/questions/${}`).({
+  //   // });
+  // }
 
   async function handleDeleteQuestion(questionId: string) {
     if (window.confirm("Você tem certeza que deseja excluir essa pergunta?")) {
